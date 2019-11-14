@@ -1,3 +1,4 @@
+// 提交添加用户数据
 $('#userForm').on('submit', function() {
     let formData = $(this).serialize();
     $.ajax({
@@ -12,4 +13,29 @@ $('#userForm').on('submit', function() {
         }
     })
     return false;
+})
+
+// 头像上传
+$('#avatar').on('change', function() {
+    let formData = new FormData();
+    formData.append('avatar', this.files[0]);
+    $.ajax({
+        type: 'post',
+        url: '/upload',
+        data: formData,
+        // 告诉$.ajax不要解析请求参数
+        processData: false,
+        // 告诉$.ajax不要设置请求参数的类型
+        contentType: false,
+        success: function(response) {
+            console.log(response);
+            // 图片预览功能
+            $('#preview').attr('src', response[0].avatar);
+            // 隐藏表单域用来提交数据
+            $('#hiddenAvatar').val(response[0].avatar);
+        },
+        error: function() {
+            alert('头像上传失败！')
+        }
+    })
 })
