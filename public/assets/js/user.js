@@ -1,22 +1,23 @@
 // 提交添加用户数据
-$('#userForm').on('submit', function() {
+$('#modifyBox').on('submit', '#userForm', function () {
     let formData = $(this).serialize();
     $.ajax({
         type: 'post',
         url: '/users',
         data: formData,
-        success: function() {
+        success: function () {
             location.reload();
         },
-        error: function() {
+        error: function () {
             alert('用户添加失败');
         }
     })
+    // 阻止表单默认提交
     return false;
 })
 
 // 头像上传
-$('#avatar').on('change', function() {
+$('#modifyBox').on('change', '#avatar', function () {
     let formData = new FormData();
     formData.append('avatar', this.files[0]);
     $.ajax({
@@ -27,14 +28,14 @@ $('#avatar').on('change', function() {
         processData: false,
         // 告诉$.ajax不要设置请求参数的类型
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             console.log(response);
             // 图片预览功能
             $('#preview').attr('src', response[0].avatar);
             // 隐藏表单域用来提交数据
             $('#hiddenAvatar').val(response[0].avatar);
         },
-        error: function() {
+        error: function () {
             alert('头像上传失败！')
         }
     })
@@ -42,10 +43,44 @@ $('#avatar').on('change', function() {
 
 // 渲染列表
 $.ajax({
-    type:'get',
+    type: 'get',
     url: '/users',
-    success: function(response) {
-        let html = template('userTpl', {data: response});
+    success: function (response) {
+        let html = template('userTpl', {
+            data: response
+        });
         $('#userList').html(html);
     }
+})
+
+// 修改用户
+$('#userList').on('click', '.edit', function () {
+    let id = $(this).attr('data-id');
+    $.ajax({
+        type: 'get',
+        url: `/users/${id}`,
+        success: function (response) {
+            var html = template('modifyTpl', response);
+            $('#modifyBox').html(html);
+        }
+    })
+})
+
+// 提交修改
+$('#modifyBox').on('submit', '#modifyForm', function() {
+    let id = $(this).attr('data-id');
+    let formData = $(this).serialize();
+    $.ajax({
+        type: 'put',
+        url: `/users/${id}`,
+        data: formData,
+        success: function() {
+            location.reload();
+        },
+        error: function() {
+            alert('用户修改失败');
+        }
+    })
+    // 阻止表单默认提交
+    return false;
 })
