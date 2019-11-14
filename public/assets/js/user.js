@@ -39,3 +39,13 @@ $('#avatar').on('change', function() {
         }
     })
 })
+
+// 渲染列表
+$.ajax({
+    type:'get',
+    url: '/users',
+    success: function(response) {
+        let html = template('userTpl', {data: response});
+        $('#userList').html(html);
+    }
+})
