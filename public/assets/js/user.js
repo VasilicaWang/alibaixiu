@@ -102,9 +102,15 @@ $('#userList').on('click', '.delete', function() {
 
 // 批量删除用户
 let selectAll = $("#selectAll");
+let deleteMany = $("#deleteMany");
 // 全选按钮控制单选按钮
 selectAll.on('change', function() {
     let status = $(this).prop('checked');
+    if(status) {
+        deleteMany.show();
+    }else{
+        deleteMany.hide();  
+    }
     $('#userList').find('input').prop('checked', status);
 })
 // 单个按钮控制全选按钮
@@ -114,5 +120,27 @@ $('#userList').on('change', '.userStatus', function() {
         selectAll.prop('checked', true);
     }else{
         selectAll.prop('checked', false);
+    }
+    if(inputs.filter(':checked').length > 0) {
+        deleteMany.show();
+    }else{
+        deleteMany.hide();
+    }
+})
+deleteMany.on('click', function() {
+    let checkedUser = $('#userList').find('input:checked');
+    let ids = [];
+    checkedUser.each((i,ele) => {
+        ids.push($(ele).attr('data-id'));
+    })
+    console.log(ids);
+    if(confirm('确定要批量删除吗')) {
+        $.ajax({
+            type: 'delete',
+            url: `/users/${ids.join('-')}`,
+            success: function () {
+                location.reload();
+            }
+        })
     }
 })
