@@ -84,3 +84,35 @@ $('#modifyBox').on('submit', '#modifyForm', function() {
     // 阻止表单默认提交
     return false;
 })
+
+// 删除用户
+$('#userList').on('click', '.delete', function() {
+    if(confirm('确认要删除用户吗？')) {
+        let id = $(this).attr('data-id');
+        // alert(id);
+        $.ajax({
+            type: 'delete',
+            url: `/users/${id}`,
+            success: function() {
+                location.reload();
+            }
+        })
+    }
+})
+
+// 批量删除用户
+let selectAll = $("#selectAll");
+// 全选按钮控制单选按钮
+selectAll.on('change', function() {
+    let status = $(this).prop('checked');
+    $('#userList').find('input').prop('checked', status);
+})
+// 单个按钮控制全选按钮
+$('#userList').on('change', '.userStatus', function() {
+    let inputs = $('#userList').find('input');
+    if(inputs.length == inputs.filter(':checked').length) {
+        selectAll.prop('checked', true);
+    }else{
+        selectAll.prop('checked', false);
+    }
+})
