@@ -29,7 +29,7 @@ $.ajax({
 // 添加轮播图
 $('#slidesForm').on('submit', function() {
     let formData = $(this).serialize();
-    console.log(formData);
+    // console.log(formData);
     $.ajax({
         type: 'post',
         url: '/slides',
