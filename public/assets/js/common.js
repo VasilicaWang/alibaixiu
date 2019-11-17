@@ -1,3 +1,4 @@
+// 用户退出
 $('#logout').on('click', function() {
     let isConfirm = confirm('确认退出吗？')
     if(isConfirm) {
@@ -6,6 +7,7 @@ $('#logout').on('click', function() {
             url: '/logout',
             success: function() {
                 location.href = 'login.html';
+                localStorage.removeItem('user');
             },
             error: function() {
                 alert('退出失败')
@@ -21,10 +23,10 @@ function formateDate(date) {
 }
 
 // 更改用户头像
-let userId = JSON.parse(localStorage.getItem('user'))._id;
+let id = JSON.parse(localStorage.getItem('user'))._id;
 $.ajax({
     type: 'get',
-    url: `/users/${userId}`,
+    url: `/users/${id}`,
     success: function(response) {
         // console.log(response);
         $('.profile .avatar').attr('src', response.avatar);
