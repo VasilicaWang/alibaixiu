@@ -43,7 +43,7 @@ const SettingSchema = new Schema({
 	review: {
 		type: Boolean,
 		required: true,
-		default: true
+		default: false
 	}
 }, {versionKey: false});
 
@@ -57,8 +57,8 @@ const validateSettings = settings => {
 		title: Joi.string().min(2).max(30).required().error(new Error('网站标题不符合验证规则')),
 		description: Joi.string().min(2).max(30).required().error(new Error('网站描述不符合验证规则')),
 		keywords: Joi.string().min(2).max(30).required().error(new Error('网站关键字不符合验证规则')),
-		comment: Joi.boolean().required().error(new Error('是否开启评论功能不符合验证规则')),
-		review: Joi.boolean().required().error(new Error('评论必须经过人工审核不符合验证规则')),
+		// comment: Joi.boolean().required().error(new Error('是否开启评论功能不符合验证规则')),
+		// review: Joi.boolean().required().error(new Error('评论必须经过人工审核不符合验证规则')),
 	};
 	// 验证
 	return Joi.validate(settings, schema, {

@@ -43,10 +43,10 @@ $.ajax({
             $('#site_name').val(response.title);
             $('#site_description').val(response.description);
             $('#site_keywords').val(response.keywords);
-            $('#comment_status').val(response.comment);
+            // $('#comment_status').val(response.comment);
             $('#comment_status').prop('checked', response.comment);
             
-            $('#comment_reviewed').val(response.review);
+            // $('#comment_reviewed').val(response.review);
             $('#comment_reviewed').prop('checked', response.review);
 
         }
