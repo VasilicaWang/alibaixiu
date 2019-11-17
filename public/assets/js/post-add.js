@@ -81,6 +81,7 @@ if (getUrlParams('id') != -1) {
 // 编辑文章
 $('#postBox').on('submit', '#modifyForm', function () {
     let formData = $(this).serialize();
+    let id = $(this).attr('data-id');
     $.ajax({
         type: 'put',
         url: `/posts/${id}`,

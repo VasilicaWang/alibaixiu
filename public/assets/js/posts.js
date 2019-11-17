@@ -24,7 +24,6 @@ function changePage(page) {
             page: page
         },
         success: function (response) {
-            console.log(response);
             let html = template('postsTpl', response);
             $('#postsBox').html(html);
             let pageHtml = template('pageTpl', response);
@@ -61,4 +60,18 @@ $('#filterForm').on('submit', function () {
         }
     })
     return false;
+})
+
+// 删除文章
+$('#postsBox').on('click', '.delete', function () {
+    if (confirm('确认删除文章吗？')) {
+        let id = $(this).attr('data-id');
+        $.ajax({
+            type: 'delete',
+            url: `/posts/${id}`,
+            success: function () {
+                location.reload();
+            }
+        })
+    }
 })
