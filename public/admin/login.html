@@ -18,10 +18,12 @@
       </div> -->
       <div class="form-group">
         <label for="email" class="sr-only">邮箱</label>
-        <input id="email" value="itheima@itcast.cn" type="email" class="form-control" placeholder="邮箱" autofocus>
+        <!-- <input id="email" value="itheima@itcast.cn" type="email" class="form-control" placeholder="邮箱" autofocus> -->
+        <input id="email" value="test@123.com" type="email" class="form-control" placeholder="邮箱" autofocus>
       </div>
       <div class="form-group">
         <label for="password" class="sr-only">密码</label>
+        <!-- <input id="password" value="123456" type="password" class="form-control" placeholder="密码"> -->
         <input id="password" value="123456" type="password" class="form-control" placeholder="密码">
       </div>
       <button class="btn btn-primary btn-block" id="loginBtn">登 录</button>
@@ -49,11 +51,7 @@
         },
         success: function (response) {
           localStorage.setItem('user', JSON.stringify(response));
-          // 会产生历史记录
           location.href = 'index.html';
-          // location.assign('index.html');
-          // 不会产生历史记录
-          // location.replace('index.html');
         },
         error: function () {
           alert('邮箱或密码错误');
