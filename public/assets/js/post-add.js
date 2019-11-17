@@ -2,14 +2,16 @@
 $.ajax({
     type: 'get',
     url: '/categories',
-    success: function(response) {
-        let html = template('categoryTpl', {data: response});
+    success: function (response) {
+        let html = template('categoryTpl', {
+            data: response
+        });
         $('#category').html(html);
     }
 })
 
 // 上传文章封面图
-$('#feature').on('change', function() {
+$('#postBox').on('change', '#feature', function () {
     let file = this.files[0];
     let formData = new FormData();
     formData.append('cover', file);
@@ -21,21 +23,70 @@ $('#feature').on('change', function() {
         processData: false,
         // 告诉$.ajax不要设置参数类型
         contentType: false,
-        success: function(response) {
-            $('#thumbnail').val(response[0].cover)
+        success: function (response) {
+            $('#thumbnail').val(response[0].cover);
+            $('#preview').attr('src', response[0].cover);
+            $('#preview').show();
         }
     })
 })
 
 // 文章上传
-$('#addForm').on('submit', function() {
+$('#postBox').on('submit', '#addForm', function () {
     let formData = $(this).serialize();
     $.ajax({
         type: 'post',
         url: '/posts',
         data: formData,
-        success: function() {
+        success: function () {
             location.href = '/admin/posts.html';
+        }
+    })
+    return false;
+})
+
+// 获取地址栏参数
+function getUrlParams(name) {
+    let paramsArr = location.search.substr(1).split('&');
+    for (var i = 0; i < paramsArr.length; i++) {
+        let tmp = paramsArr[i].split('=');
+        if (tmp[0] == name) {
+            return tmp[1];
+        }
+    }
+    return -1;
+}
+
+let id = getUrlParams('id');
+// 修改界面
+if (getUrlParams('id') != -1) {
+    $.ajax({
+        type: 'get',
+        url: `/posts/${id}`,
+        success: function (response) {
+            $.ajax({
+                type: 'get',
+                url: '/categories',
+                success: function (categories) {
+                    response.categories = categories
+                    console.log(response);
+                    let html = template('modifyFormTpl', response);
+                    $('#postBox').html(html);
+                }
+            })
+        }
+    })
+}
+
+// 编辑文章
+$('#postBox').on('submit', '#modifyForm', function () {
+    let formData = $(this).serialize();
+    $.ajax({
+        type: 'put',
+        url: `/posts/${id}`,
+        data: formData,
+        success: function() {
+            location.href = "/admin/posts.html";
         }
     })
     return false;
