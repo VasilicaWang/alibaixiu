@@ -28,7 +28,6 @@ $.ajax({
     type: 'get',
     url: `/users/${id}`,
     success: function(response) {
-        // console.log(response);
         $('.profile .avatar').attr('src', response.avatar);
         $('.profile .name').html(response.nickName);
     }
