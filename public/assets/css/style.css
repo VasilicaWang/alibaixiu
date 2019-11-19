@@ -1054,6 +1054,12 @@ img {
   background-color: #fff;
 }
 
+.content .article .articleContent {
+  margin-top: 20px;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
 .content .breadcrumb dt,
 .content .breadcrumb dd {
   display: inline-block;

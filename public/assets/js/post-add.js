@@ -3,6 +3,7 @@ $.ajax({
     type: 'get',
     url: '/categories',
     success: function (response) {
+        console.log(response);
         let html = template('categoryTpl', {
             data: response
         });
@@ -57,12 +58,12 @@ function getUrlParams(name) {
     return -1;
 }
 
-let id = getUrlParams('id');
+let postId = getUrlParams('id');
 // 修改界面
 if (getUrlParams('id') != -1) {
     $.ajax({
         type: 'get',
-        url: `/posts/${id}`,
+        url: `/posts/${postId}`,
         success: function (response) {
             $.ajax({
                 type: 'get',
