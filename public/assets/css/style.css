@@ -1242,6 +1242,12 @@ img {
   float: left;
 }
 
+.aside .discuz .avatar img {
+  width: 64px;
+  max-width: 64px;
+  height: 100%;
+}
+
 .aside .discuz .txt {
   height: 40px;
   line-height: 20px;
