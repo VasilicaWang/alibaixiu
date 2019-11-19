@@ -28,7 +28,6 @@ $.ajax({
   type: 'get',
   url: '/comments/lasted',
   success: function (response) {
-    console.log(response);
     let lastedCommentsTpl = `
     {{each data}}
     <li>
@@ -50,5 +49,17 @@ $.ajax({
       data: response
     });
     $('#lastedCommentsBox').html(html);
+  }
+})
+
+// 导航数据
+$.ajax({
+  type: 'get',
+  url: 'categories',
+  success: function(response) {
+    let navTpl = `{{each data}}<li><a href="list.html?categoryId={{$value._id}}"><i class="fa {{$value.className}}"></i>{{$value.title}}</a></li>{{/each}}`;
+    let navHtml = template.render(navTpl, {data: response});
+    $('#navBox').html(navHtml);
+    $('#topNavBox').html(navHtml);
   }
 })
