@@ -4,6 +4,7 @@ const { Post } = require('../../../model/Post');
 
 module.exports = async (req, res) => {
 	if (req.session.userInfo) {
+		console.log(req.fields);
 		// 存储评论人信息
 		req.fields.author = req.session.userInfo._id;
 		// 数据格式校验

@@ -4,7 +4,13 @@ $.ajax({
     type: 'get',
     url: `/posts/search/${key}`,
     success: function(response) {
-        let html = template('searchTpl', {data: response});
+        console.log(response);
+        let html = '';
+        if(response.length > 0) {
+            html = template('searchTpl', {data: response});
+        }else{
+            html = ' <div class="head">空空如也~~</div>';
+        }
         $('#listBox').html(html);
     }
 })

@@ -11,9 +11,11 @@
 
 <body>
   <div class="wrapper">
-    <div class="topnav" id="topNavBox">
-      <ul>
-
+    <div class="topnav">
+      <ul id="topNavBox" style="float: left">
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="float: right">
+        <li><a href="javascript:;" id="logout"><i class="fa fa-sign-out"></i>退出</a></li>
       </ul>
     </div>
     <div class="header">
@@ -27,6 +29,9 @@
           <input type="submit" class="btn" value="搜索">
         </form>
       </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="javascript:;" id="logout"><i class="fa fa-sign-out"></i>退出</a></li>
+      </ul>
     </div>
     <div class="aside">
       <div class="widgets">
@@ -62,7 +67,6 @@
   </div>
   <script src="./assets/vendors/jquery/jquery.min.js"></script>
   <script src="./assets/vendors/art-template/template-web.js"></script>
-  <script src="assets/js/common.js"></script>
   <script src="./assets/js/public.js"></script>
   <script type="text/html" id="listTpl">
     {{each data}}

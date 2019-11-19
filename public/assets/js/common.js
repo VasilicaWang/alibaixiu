@@ -23,10 +23,10 @@ function formateDate(date) {
 }
 
 // 更改用户头像
-let id = JSON.parse(localStorage.getItem('user'))._id;
+let userid = JSON.parse(localStorage.getItem('user'))._id;
 $.ajax({
     type: 'get',
-    url: `/users/${id}`,
+    url: `/users/${userid}`,
     success: function(response) {
         $('.profile .avatar').attr('src', response.avatar);
         $('.profile .name').html(response.nickName);
