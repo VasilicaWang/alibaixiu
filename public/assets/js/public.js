@@ -77,3 +77,10 @@ function getUrlParams(name) {
   }
   return -1;
 }
+
+// 文章搜索
+$('.search form').on('submit', function() {
+  let key = $(this).find('.keys').val();
+  location.href = `search.html?key=${key}`;
+  return false;
+})
