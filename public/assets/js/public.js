@@ -56,10 +56,24 @@ $.ajax({
 $.ajax({
   type: 'get',
   url: 'categories',
-  success: function(response) {
+  success: function (response) {
     let navTpl = `{{each data}}<li><a href="list.html?categoryId={{$value._id}}"><i class="fa {{$value.className}}"></i>{{$value.title}}</a></li>{{/each}}`;
-    let navHtml = template.render(navTpl, {data: response});
+    let navHtml = template.render(navTpl, {
+      data: response
+    });
     $('#navBox').html(navHtml);
     $('#topNavBox').html(navHtml);
   }
 })
+
+// 获取地址栏参数
+function getUrlParams(name) {
+  let paramsArr = location.search.substr(1).split('&');
+  for (var i = 0; i < paramsArr.length; i++) {
+    let tmp = paramsArr[i].split('=');
+    if (tmp[0] == name) {
+      return tmp[1];
+    }
+  }
+  return -1;
+}
