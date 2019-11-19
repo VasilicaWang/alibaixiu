@@ -1,4 +1,5 @@
 let categoryId = getUrlParams('categoryId');
+// 根据分类找出所有文章
 $.ajax({
     type: 'get',
     url: `/posts/category/${categoryId}`,
@@ -7,7 +8,7 @@ $.ajax({
         $('#listBox').html(html);
     }
 })
-
+// 获取分类名称
 $.ajax({
     type: 'get',
     url: `/categories/${categoryId}`,

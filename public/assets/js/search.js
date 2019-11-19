@@ -1,5 +1,5 @@
 let key = getUrlParams('key');
-
+// 根据关键字查询文章
 $.ajax({
     type: 'get',
     url: `/posts/search/${key}`,
